@@ -1,0 +1,18 @@
+<div><% INCLUDE 'Wiki/breadcrumb.tt' %></div>
+<hr>
+<div align="center">
+<a class="btn" href="#"><i class="icon-eye-open"></i> Show revisions</a>
+<a class="btn" href="Wiki?page=<% page %>&mode=edit"><i class="icon-pencil"></i> Edit this page</a>
+</div>
+<hr>
+<% html %>
+<hr>
+<div><% INCLUDE 'Wiki/authors.tt' %></div>
+<div><% INCLUDE 'Wiki/tags_show.tt' %></div>
+<hr>
+<div align="center">
+<a class="btn" href="#"><i class="icon-eye-open"></i> Show revisions</a>
+<a class="btn" href="Wiki?mode=edit"><i class="icon-pencil"></i> Edit this page</a>
+</div>
+<hr>
+<div><% INCLUDE 'Wiki/breadcrumb.tt' %></div>

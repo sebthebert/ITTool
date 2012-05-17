@@ -1,0 +1,28 @@
+<html>
+<head>
+<link rel="stylesheet" href="/css/bootstrap.css" type="text/css" media="all" />
+<title><% page_title %></title>
+</head>
+<body>
+<div id="page_header"></div>
+
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+        <div class="container">
+		<a class="brand" href="#">ITTool</a>
+			<div class="nav-collapse">
+            <ul class="nav">
+				<li class=""><a href="./index.html">Log Management</a></li>
+              	<li class=""><a href="./index.html">Monitoring</a></li>
+              	<li class=""><a href="./scaffolding.html">Wiki</a></li>
+            </ul>
+          	</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+<% content %>
+</div>
+<div id="page_footer"></div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<% INCLUDE 'Wiki/breadcrumb.tt' %>
+<form method="post" action="Wiki" class="well">
+<input type="hidden" name="page" value="<% page %>">
+<textarea name="text">
+<% text %>
+</textarea>
+<div><% INCLUDE 'Wiki/authors.tt' %></div>
+<div><% INCLUDE 'Wiki/tags_edit.tt' %></div>
+<div class="form-actions" align="center">
+	<button type="submit" class="btn"><i class="icon-download"></i> Save changes</button>
+  	<button type="reset" class="btn"><i class="icon-remove"></i> Cancel</button>
+</div>
+</form>
+<% INCLUDE 'Wiki/breadcrumb.tt' %>

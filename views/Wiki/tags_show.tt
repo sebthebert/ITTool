@@ -1,0 +1,4 @@
+<b>Tags</b> <i class="icon-tags"></i>
+<% FOREACH tag IN tags %>
+    <span class="label label-info"><% tag %></span> 
+<% END %>

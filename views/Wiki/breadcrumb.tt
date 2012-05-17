@@ -1,0 +1,5 @@
+<ul class="breadcrumb">
+<% FOREACH item IN path.split('/') %>
+    <li><span class="divider">/</span><a href="#"><% item %></a></li>
+<% END %>
+</ul>

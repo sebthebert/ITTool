@@ -1,0 +1,2 @@
+<b>Tags</b> <i class="icon-tags"></i>
+<input type="text" name="tags" placeholder="Enter tags separated by ','" value="<% tags.join(', ') %>" />
