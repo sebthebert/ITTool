@@ -1,5 +1,5 @@
-<% INCLUDE 'Wiki/breadcrumb.tt' %>
-<form method="post" action="Wiki" class="well">
+<div><% INCLUDE 'Wiki/breadcrumb.tt' %></div>
+<form method="post" action="/Wiki/page/show/<% page %>" class="well">
 <input type="hidden" name="page" value="<% page %>">
 <textarea name="text">
 <% text %>
@@ -11,4 +11,4 @@
   	<button type="reset" class="btn"><i class="icon-remove"></i> Cancel</button>
 </div>
 </form>
-<% INCLUDE 'Wiki/breadcrumb.tt' %>
+<div><% INCLUDE 'Wiki/breadcrumb.tt' %></div>
