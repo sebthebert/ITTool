@@ -1,0 +1,24 @@
+<hr><hr>
+<form action="/Wiki/folder/create" method="post" class="form-horizontal">
+<fieldset>
+<div class="control-group">
+    <div class="controls">
+        <input type="text" id="folder" placeholder="Enter folder name">
+        <button type="submit" class="btn"><i class="icon-folder-open"></i> New Folder</button>
+    </div>
+</div>
+</fieldset>
+</form>
+<form action="/Wiki/page/create" method="post" class="form-horizontal">
+<fieldset>
+<div class="control-group">
+    <div class="controls">
+        <input type="text" name="page" id="page" placeholder="Enter page name">
+        <button type="submit" class="btn"><i class="icon-file"></i> New Page</button>
+    </div>
+</div>
+</fieldset>
+</form>
+<% INCLUDE 'Wiki/folder_list.tt' %>
+<% INCLUDE 'Wiki/page_list.tt' %>
+</div>

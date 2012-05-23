@@ -1,20 +1,27 @@
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" media="all" />
 <title><% page_title %></title>
 </head>
-<body>
-<div id="page_header"></div>
+<body data-spy="scroll" data-target=".subnav" data-offset="50">
+
 
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
         <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
 		<a class="brand" href="#">ITTool</a>
-			<div class="nav-collapse">
+			<div class="nav-collapse collapse">
             <ul class="nav">
-				<li class=""><a href="./index.html">Log Management</a></li>
-              	<li class=""><a href="./index.html">Monitoring</a></li>
-              	<li class=""><a href="./scaffolding.html">Wiki</a></li>
+                <li class=""><a href="/CMDB">CMDB</a></li>
+				<li class=""><a href="/LogManagement">Log Management</a></li>
+              	<li class=""><a href="/Monitoring">Monitoring</a></li>
+              	<li class=""><a href="/Wiki">Wiki</a></li>
             </ul>
           	</div>
 		</div>

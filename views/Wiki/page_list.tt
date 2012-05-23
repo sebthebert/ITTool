@@ -1,0 +1,3 @@
+<% FOREACH p in pages %>
+    <li><a href="/Wiki/page/show/<% p %>"><% p %></li>
+<% END %>

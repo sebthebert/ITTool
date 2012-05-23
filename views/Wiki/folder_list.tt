@@ -1,0 +1,3 @@
+<% FOREACH f in folders %>
+    <li><a href="/Wiki/folder/show/<% f %>"><% f %></li>
+<% END %>

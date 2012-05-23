@@ -7,6 +7,19 @@ use ITTool::Wiki;
 
 prefix '/Wiki/page';
 
+=head2 [POST] /Wiki/page/create
+
+=cut
+
+post '/create' => sub
+{
+    my $page = params->{'page'};
+    
+    ITTool::Wiki::Page_Create($page);	
+    
+    redirect "/Wiki/page/edit/$page";
+};
+
 =head2 [GET] /Wiki/page/edit/:page
 
 =cut
@@ -27,6 +40,14 @@ get '/edit/:page' => sub
         };
 };
 
+get '/remove/:page' => sub
+{
+    my $page = params->{'page'};
+
+    ITTool::Wiki::Page_Remove($page);
+    redirect '/Wiki/';
+};
+
 =head2 [GET] /Wiki/page/revisions/:page
 
 =cut
@@ -34,8 +55,8 @@ get '/edit/:page' => sub
 get '/revisions/:page' => sub
 {
     my $page = params->{'page'};
-    
-    #my @revisions = ITTool::Wiki::Page_Revisions($page);
+
+    my @revisions = ITTool::Wiki::Page_Revisions($page);
 };
 
 =head2 [GET / POST] /Wiki/page/show/:page
