@@ -1,5 +1,8 @@
 package ITTool::Web::Wiki::Page;
 
+use strict;
+use warnings;
+
 use Dancer ':syntax';
 use Text::Markdown 'markdown';
 

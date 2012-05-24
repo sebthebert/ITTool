@@ -1,5 +1,8 @@
 package ITTool::Wiki;
 
+use strict;
+use warnings;
+
 use File::Slurp;
 use FindBin;
 

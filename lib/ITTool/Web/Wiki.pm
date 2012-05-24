@@ -1,5 +1,8 @@
 package ITTool::Web::Wiki;
 
+use strict;
+use warnings;
+
 use Dancer ':syntax';
 
 use ITTool::Wiki;
