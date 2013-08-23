@@ -18,7 +18,7 @@ sub Page_Create
     
     my $path = $page;
     $path =~ s/::/\//g;
-    $tags =~ s/\s*,\s*/\n/g;
+    my $tags =~ s/\s*,\s*/\n/g;
     write_file("$DIR_DATA/${path}.txt", "# $page");
     write_file("$DIR_DATA/${path}.authors", 'Sebastien Thebert');
     write_file("$DIR_DATA/${path}.tags", '');
@@ -55,9 +55,10 @@ sub Page_Load
     
     my $path = $page;
     $path =~ s/::/\//g; 
-    my $text = read_file("$DIR_DATA/${path}.txt");
-    my @authors = read_file("$DIR_DATA/${path}.authors");
-    my @tags = read_file("$DIR_DATA/${path}.tags");     	
+    my ($file_text, $file_authors, $file_tags) = map { "$DIR_DATA/${path}." . $_ } (qw/txt authors tags/);
+    my $text = (-r $file_text ? read_file($file_text) : '');
+    my @authors = (-r $file_authors ? read_file($file_authors) : ());
+    my @tags = (-r $file_tags ? read_file($file_tags) : ());     	
 
     return ($text, \@authors, \@tags);
 }

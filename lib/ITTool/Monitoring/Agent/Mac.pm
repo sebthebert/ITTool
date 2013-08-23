@@ -13,35 +13,35 @@ use FindBin;
 
 use lib "$FindBin::Bin/../lib/";
 
-#use ITTool::Monitoring::Agent::Mac::Hardware;
+use ITTool::Monitoring::Agent::Mac::Hardware;
 #use ITTool::Monitoring::Agent::Mac::System;
 
 my %check = (
 	'Hardware.CPU.Information' => {
-        fct  => \&ITTool::Monitoring::Agent::Linux::Hardware::CPU_Info,
+        fct  => \&ITTool::Monitoring::Agent::Mac::Hardware::CPU_Info,
         args => [],
-	type => 'string'
+        type => 'string'
     },
-	'System.Domainname' => {
-        fct  => \&ITTool::Monitoring::Agent::Linux::System::Domainname,
-        args => [],
-	type => 'string'
-    },
-    'System.Hostname' => {
-        fct  => \&ITTool::Monitoring::Agent::Linux::System::Hostname,
-        args => [],
-	type => 'string'
-    },
-	'System.Load' => {
-        fct  => \&ITTool::Monitoring::Agent::Linux::System::Load,
-        args => [],
-	type => 'load'
-    },
-	'System.Memory' => {
-        fct  => \&ITTool::Monitoring::Agent::Linux::System::Memory,
-        args => [],
-	type => 'byte'
-    },
+	#'System.Domainname' => {
+    #    fct  => \&ITTool::Monitoring::Agent::Linux::System::Domainname,
+    #    args => [],
+	#type => 'string'
+    #},
+    #'System.Hostname' => {
+    #    fct  => \&ITTool::Monitoring::Agent::Linux::System::Hostname,
+    #    args => [],
+	#type => 'string'
+    #},
+	#'System.Load' => {
+    #    fct  => \&ITTool::Monitoring::Agent::Linux::System::Load,
+    #    args => [],
+	#type => 'load'
+    #},
+	#'System.Memory' => {
+    #    fct  => \&ITTool::Monitoring::Agent::Linux::System::Memory,
+    #    args => [],
+	#type => 'byte'
+    #},
 		);
 
 =head1 FUNCTIONS
