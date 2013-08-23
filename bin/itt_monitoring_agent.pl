@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 =head1 NAME
 
@@ -53,6 +53,7 @@ Returns System Information
 Prints Agent version
 
 =back
+
 =cut
 
 use strict;
@@ -270,7 +271,13 @@ sub Version
     exit;
 }
 
+#
+# MAIN
+#
+
 my %opt = ();
+
+pod2usage(0)    if (@ARGV < 1);
 
 my $status = GetOptions(
     'h|help'       => \$opt{help},
