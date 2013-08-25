@@ -71,6 +71,8 @@ use ITTool::Monitoring::Agent;
 Readonly my $OS     => ITTool::Monitoring::Agent::Operating_System();
 Readonly my $TITLE  => "ITTool Monitoring Agent (for $OS)";
 
+my $agent = undef;
+
 =head1 FUNCTIONS
 
 =head2 Checks_Available()
@@ -81,7 +83,7 @@ Returns list of available checks for this agent
 
 sub Checks_Available
 {
-    my @list         = ITTool::Monitoring::Agent::Checks_Available();
+    my @list         = $agent->Checks_Available();
     my $nb_available = scalar @list;
 
     printf "%s\n\nAvailable Checks (%d):\n", $TITLE, $nb_available;
@@ -109,8 +111,6 @@ Launch ITTool Monitoring Agent as Daemon
 
 sub Daemon
 {
-	my $agent = ITTool::Monitoring::Agent->new();
-	
 	if (fork())
 	{ #father -> API Listener
 	   $agent->Listener();  
@@ -127,7 +127,7 @@ sub Daemon
   		    	if (($time - $check->{last_check}) >= $check->{interval})
   		    	{
 				    $agent->Log('debug', "Check '$check->{name}'");
-				    my $result = ITTool::Monitoring::Agent::Check($check->{name});
+				    my $result = $agent->Check($check->{name});
 				    $check->Data_Write($result)	if (defined $result);
 				    $check->{last_check} = $time;
       		    }
@@ -145,7 +145,7 @@ sub Get
 {
     my $check = shift;
 
-    my $result = ITTool::Monitoring::Agent::Check($check);
+    my $result = $agent->Check($check);
 	if ($result->{status} eq 'ok')
 	{
     	foreach my $key (keys %{$result->{data}})
@@ -171,7 +171,7 @@ Returns Hardware Information (all checks starting with 'Hardware.')
 sub Hardware_Information
 {
     my @checks =
-        grep { $_->{name} =~ /^Hardware\./ } ITTool::Monitoring::Agent::Checks_Available();
+        grep { $_->{name} =~ /^Hardware\./ } $agent->Checks_Available();
 
     print "Hardware Information:\n";
 	Print_Check_Results(@checks);
@@ -189,7 +189,7 @@ sub Print_Check_Results
 
 	foreach my $check (@checks)
     {
-        my $result = ITTool::Monitoring::Agent::Check($check->{name});
+        my $result = $agent->Check($check->{name});
         if ($result->{status} eq 'ok')
         {
             foreach my $key (keys %{$result->{data}})
@@ -212,11 +212,12 @@ Prints Agent Configuration
 
 sub Print_Config
 {
-	my $agent = ITTool::Monitoring::Agent->new();
-
-    foreach my $c (@{$agent->{checks}})
-    {
-        print "Check: $c->{name} ==> $c->{interval} seconds\n";
+	printf "ITTool Monitoring Agent Configuration:\n";
+	printf "Checks:\n";
+    my @checks = $agent->Checks_List();
+	foreach my $c (@checks)
+	{
+        print "\t$c->{name} ==> $c->{interval} seconds\n";
     }
 
     return (scalar(@{$agent->{checks}}));
@@ -231,7 +232,7 @@ Returns System Information (checks starting with 'System.')
 sub System_Information
 {
     my @checks =
-        grep { $_->{name} =~ /^System\./ } ITTool::Monitoring::Agent::Checks_Available();
+        grep { $_->{name} =~ /^System\./ } $agent->Checks_Available();
 
     print "System Information:\n";
 	Print_Check_Results(@checks);
@@ -248,7 +249,7 @@ Returns Software Information (checks starting with 'Software.')
 sub Software_Information
 {
     my @checks =
-        grep { $_->{name} =~ /^Software\./ } ITTool::Monitoring::Agent::Checks_Available();
+        grep { $_->{name} =~ /^Software\./ } $agent->Checks_Available();
 
     print "Software Information:\n";
 	Print_Check_Results(@checks);
@@ -264,7 +265,7 @@ Prints Agent Version
 
 sub Version
 {
-    my $version = ITTool::Monitoring::Agent::Version()->{data}->{Version};
+    my $version = $agent->Version()->{data}->{Version};
 
     printf "%s - version %s\n", $TITLE, $version;
 
@@ -293,6 +294,8 @@ my $status = GetOptions(
 	);
 
 pod2usage(0) if ((!$status) || ($opt{help}));
+
+$agent = ITTool::Monitoring::Agent->new();
 
 Checks_Available() 		if ($opt{available});
 Print_Config()     		if ($opt{config});

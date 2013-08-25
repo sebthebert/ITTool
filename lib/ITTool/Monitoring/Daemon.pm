@@ -52,10 +52,10 @@ sub Listener
 	my $self = shift;
 	
     my $daemon = HTTP::Daemon::SSL->new(
-            ReuseAddr => 1, LocalAddr => $self->{ip}, LocalPort => $self->{port},
-            SSL_cert_file => "$FindBin::Bin/../conf/certs/server-cert.pem",
-            SSL_key_file => "$FindBin::Bin/../conf/certs/server-key.pem") 
-            || die IO::Socket::SSL::errstr();
+    	ReuseAddr => 1, LocalAddr => $self->{ip}, LocalPort => $self->{port},
+       	SSL_cert_file => "$FindBin::Bin/../conf/certs/server-cert.pem",
+       	SSL_key_file => "$FindBin::Bin/../conf/certs/server-key.pem") 
+       	|| die IO::Socket::SSL::errstr();
 
     my $json_header = HTTP::Headers->new('Content-Type' => 'application/json');
     $self->Log('info', 'Monitoring Agent API listening on ' . $daemon->url);
@@ -63,11 +63,14 @@ sub Listener
     {
         while (my $request = $connection->get_request) 
         {
-            my ($method, $path, $content) = ($request->method, $request->uri->path, $request->content);
+            my ($method, $path, $query, $content) = 
+				($request->method, $request->uri->path, $request->uri->query, 
+				$request->content);
  
-            if ((defined $self->{api}->{$path}) && ($method eq $self->{api}->{$path}->{method}))
+            if ((defined $self->{api}->{$path}) 
+                && ($method eq $self->{api}->{$path}->{method}))
             {
-                my $resp_content = $self->{api}->{$path}->{action}($content);
+                my $resp_content = $self->{api}->{$path}->{action}($self, $query || $content);
                 my $resp = HTTP::Response->new(200, 'OK', $json_header, $resp_content);
                 $connection->send_response($resp);
             }

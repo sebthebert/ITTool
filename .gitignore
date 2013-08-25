@@ -1,6 +1,5 @@
 .Project
 .DS_Store
 data/*
-data/*/*
 log/*
 _old_stuff/*

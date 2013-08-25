@@ -15,6 +15,9 @@ use Readonly;
 use lib "$FindBin::Bin/../lib/";
 
 use ITTool::Configuration;
+
+use ITTool::Monitoring::Agent::API;
+
 use ITTool::Monitoring::Check;
 use ITTool::Monitoring::Check_Type;
 use ITTool::Monitoring::Software;
@@ -35,23 +38,6 @@ BEGIN
     }
 }
 
-Readonly my $API_URI_ROOT => '/api/itt_monitoring_agent';
-Readonly my %api => (
-    "$API_URI_ROOT/version" => { 
-        method => 'GET', 
-        action => sub { return (to_json({version => ITTool::Monitoring::Agent::Version()})); } },
-    "$API_URI_ROOT/checks_available" => { 
-        method => 'GET', 
-        action => sub { return (to_json([ITTool::Monitoring::Agent::Checks_Available()])); } },    
-#    "$API_URI_ROOT/get_config" => 
-#        { method => 'GET', action => \&Get_Config },
-#    "$API_URI_ROOT/set_config" => 
-#        { method => 'POST', action => \&Set_Config },
-#    "$API_URI_ROOT/get_data" => 
-#        { method => 'GET', action => \&Get_Data },        
-#    "$API_URI_ROOT/upload_app_module" => 
-#        { method => 'POST', action => \&Upload_App_Module },            
-    );			  
 Readonly my $DIR_DATA => "$FindBin::Bin/../data/monitoring_agent/";
 Readonly my $FILE_CONF => "$FindBin::Bin/../conf/itt_monitoring_agent.conf";
 
@@ -98,7 +84,7 @@ around BUILDARGS => sub
 			push @checks, $check;
 		}
 		$conf->{checks} = \@checks;
-        $conf->{api} = \%api;
+        $conf->{api} = \%agent_api;
 		$conf->{logger} = $logger;
 		
 		return $class->$orig($conf);
@@ -134,7 +120,7 @@ around BUILDARGS => sub
 
 sub Check
 {
-    my $key = shift;
+    my ($self, $key) = @_;
 
     my $value = (
         $key =~ /^ITTool\.Monitoring\.Agent\./
@@ -157,6 +143,8 @@ sub Check
 }
 
 =head2 Checks_Available
+
+Returns list of available Checks for this Agent
 
 =cut
 
@@ -197,12 +185,12 @@ sub Checks_List
 {
 	my $self = shift;
 
-	return ($self->{checks});
+	return (@{$self->{checks}});
 }
 
 =head2 Operating_System()
 
-Returns Operating System
+Returns Agent Operating System
 
 =cut
 
