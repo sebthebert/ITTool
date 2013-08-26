@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-ITTool_Configuration.t - Test Suite for ITTool::Configuration module
+lib/ITTool/Configuration.t - Test Suite for ITTool::Configuration module
 
 =cut
 
@@ -12,7 +12,7 @@ use warnings;
 use FindBin;
 use Test::More;
 
-use lib "$FindBin::Bin/../lib/";
+use lib "$FindBin::Bin/../../../lib/";
 
 BEGIN { use_ok('ITTool::Configuration'); }
 
@@ -20,7 +20,7 @@ use ITTool::Configuration;
 
 my @invalid_files = (undef, '', 'FILE_DOESNT_EXIST');
 my @invalid_modules = (undef, '', 'MODULE_DOESNT_EXIST');
-my @valid_files = ("$FindBin::Bin/conf/itt_monitoring_agent.conf");
+my @valid_files = ("$FindBin::Bin/../../../conf/itt_monitoring_agent.conf");
 my @valid_modules = ('itt_monitoring_agent');
 
 foreach my $module (@invalid_modules)

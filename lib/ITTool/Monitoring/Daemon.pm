@@ -6,6 +6,9 @@ ITTool::Monitoring::Daemon - ITTool Monitoring Daemon module
 
 package ITTool::Monitoring::Daemon;
 
+use strict;
+use warnings;
+
 use FindBin;
 use HTTP::Daemon::SSL;
 use HTTP::Headers;

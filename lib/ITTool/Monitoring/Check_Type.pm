@@ -6,6 +6,9 @@ ITTool::Monitoring::Check_Type - ITTool Monitoring Type Check module
 
 package ITTool::Monitoring::Check_Type;
 
+use strict;
+use warnings;
+
 use Readonly;
 
 Readonly my %pretty => (

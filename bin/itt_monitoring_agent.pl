@@ -2,7 +2,11 @@
 
 =head1 NAME
 
-itt_monitoring_agent.pl - ITTool Monitoring Agent program
+itt_monitoring_agent.pl
+
+=head1 DESCRIPTION
+
+ITTool Monitoring Agent program
 
 =head1 SYNOPSIS
 
@@ -22,15 +26,15 @@ Prints Available Checks
 
 =item B<-c,--config>     
 
-Prints Agent configuration
+Prints Monitoring Agent configuration
 
 =item B<--daemon-start>  
 
-Starts Agent daemon
+Starts Monitoring Agent daemon
 
 =item B<--daemon-stop>   
 
-Stops Agent daemon
+Stops Monitoring Agent daemon
 
 =item B<-g,--get> <key>  
 
@@ -50,7 +54,7 @@ Returns System Information
 
 =item B<-v,--version>    
 
-Prints Agent version
+Prints Monitoring Agent version
 
 =back
 
@@ -135,6 +139,8 @@ sub Daemon
             sleep(1);
         }
 	}
+
+    return (undef);
 }
 
 =head2 Get($check)
@@ -202,6 +208,8 @@ sub Print_Check_Results
             printf "ERROR: %s\n", $result->{data};
         }
     }
+    
+    return ($result->{status});
 }
 
 =head2 Print_Config()

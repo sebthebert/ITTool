@@ -6,6 +6,9 @@ ITTool::Monitoring::Check - ITTool Monitoring Check module
 
 package ITTool::Monitoring::Check;
 
+use strict;
+use warnings;
+
 use File::Path;
 use FindBin;
 use Moose;

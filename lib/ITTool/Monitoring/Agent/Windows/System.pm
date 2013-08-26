@@ -29,8 +29,8 @@ sub Disk_Usage
 	}
 	return ({ status => 'ok', data => \%data });
 	
-	return ({ status => 'error', 
-		data => "Unable to get DiskUsage" });
+	#return ({ status => 'error', 
+	#	data => "Unable to get DiskUsage" });
 }
 
 =head2 Domainname()
@@ -66,6 +66,10 @@ sub Hostname
     return ({ status => 'error', 
 		data => "Unable to get Domainname" });
 }
+
+=head2 Software_Installed_List()
+
+=cut
 
 sub Software_Installed_List
 {

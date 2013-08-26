@@ -6,6 +6,9 @@ ITTool::Monitoring::Agent - ITTool Monitoring Agent module
 
 package ITTool::Monitoring::Agent;
 
+use strict;
+use warnings;
+
 use FindBin;
 use JSON;
 use Log::Log4perl;
@@ -16,7 +19,7 @@ use lib "$FindBin::Bin/../lib/";
 
 use ITTool::Configuration;
 
-use ITTool::Monitoring::Agent::API;
+use ITTool::Monitoring::Agent::API  qw( %agent_api );
 
 use ITTool::Monitoring::Check;
 use ITTool::Monitoring::Check_Type;

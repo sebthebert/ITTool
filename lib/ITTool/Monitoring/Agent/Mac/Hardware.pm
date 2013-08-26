@@ -34,6 +34,7 @@ sub CPU_Info
     {
     	$model_name = <$FILE>;
     	$model_name =~ s/\s{2,}/ /g;
+        close($FILE);
         
         return ({ status => 'ok', data => { ModelName => $model_name } });
     }

@@ -5,6 +5,9 @@ ITTool::Monitoring::Agent::API - ITTool Monitoring Agent API module
 =cut
 package ITTool::Monitoring::Agent::API;
 
+use strict;
+use warnings;
+
 use Exporter 'import';
 use FindBin;
 use JSON;
@@ -13,7 +16,7 @@ use Readonly;
 use lib "$FindBin::Bin/../lib/";
 use ITTool::Monitoring::Agent;
 
-our @EXPORT = qw(%agent_api);
+our @EXPORT_OK = qw(%agent_api);
 
 Readonly my $API_ROOT => '/api/itt_monitoring_agent';
 
